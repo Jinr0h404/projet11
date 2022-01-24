@@ -3,6 +3,7 @@ from Product.models import Product
 from User.models import CustomUser
 from Favorite.models import Favorites
 from django.core.paginator import Paginator
+import re
 
 
 # Create your views here.
@@ -10,7 +11,15 @@ def search(request):
     """get the keyword in query and do a search in the product name column for all products that contain this word.
     uses paginator to create a presentation of 6 products per page"""
     query = request.GET.get("query")
-    products_list = Product.objects.filter(product_name__icontains=query).order_by("id")
+    query_list = re.findall(r'\w+', query)
+    products_list = []
+    if Product.objects.filter(product_name__icontains=query).order_by("id"):
+        products_list = Product.objects.filter(product_name__icontains=query).order_by("id")
+    else:
+        for element in query_list:
+            for i in Product.objects.filter(product_name__icontains=element).order_by("id"):
+                if i not in products_list:
+                    products_list.append(i)
     paginator = Paginator(products_list, 6)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
