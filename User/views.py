@@ -3,6 +3,9 @@ from User.forms import SignupForm, SigninForm
 from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 def index(request):
@@ -11,6 +14,7 @@ def index(request):
 
 @login_required()
 def account(request):
+
     return render(request, "User/account.html")
 
 
@@ -58,3 +62,15 @@ def logout_user(request):
     """User is disconnect and redirect on the home page"""
     logout(request)
     return redirect("index")
+
+@login_required()
+def password_change(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect(settings.LOGIN_REDIRECT_URL)
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, "User/changepassword.html", context={"form": form})

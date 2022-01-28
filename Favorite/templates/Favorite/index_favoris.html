@@ -48,6 +48,11 @@
                                 </div>
                                 <div class="card-footer">
                                     <p>remplace l'aliment: {{ product.product_id.product_name }}</p>
+                                    <FORM action="{% url 'favorite-delete_substitute'%}" method="post">
+                                    <BUTTON name="delete" value="{{product.favorite_id}}" type="submit" class="btn btn-primary btn-xl"><i class="far fa-trash-alt"></i>
+                                    Supprimer</BUTTON>
+                                    {% csrf_token %}
+                                </FORM>
                                 </div>
                             </div>
                         </div>

@@ -73,3 +73,19 @@ def test_logout_user_view():
     path = reverse("user-logout")
     response = client.get(path)
     assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_changepassword_user_connected_view():
+    """Creates a test client. Make a request on the URL retrieved using the reverse () function.
+    Check that the HTTP status code is 200 if user is connected. Check that the template used is the expected one"""
+    client = Client()
+    username = "test_user"
+    email = "troubadour@gmail.com"
+    password = "Troubadour"
+    CustomUser.objects.create_user(username=username, email=email, password=password)
+    client.login(username=email, password=password)
+    path = reverse("user-change_password")
+    response = client.get(path)
+    assert response.status_code == 200
+    assertTemplateUsed(response, "User/changepassword.html")

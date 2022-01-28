@@ -11,9 +11,7 @@ def test_search_url():
 
 def test_search_substitute_url():
     """Check if the name of the view is correct and that the URL matches the name of the view."""
-    assert (
-        resolve("/product/search_substitute").view_name == "product-search_substitute"
-    )
+    assert resolve("/product/search_substitute").view_name == "product-search_substitute"
 
 
 def test_save_substitute_url():

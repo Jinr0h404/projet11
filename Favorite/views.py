@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from Favorite.models import Favorites
 from User.models import CustomUser
@@ -29,6 +29,7 @@ def index(request):
                 "user_id": user_connected.id,
                 "product_id": Product.objects.get(pk=i.product_id_id),
                 "substitute_id": Product.objects.get(pk=i.substitute_id_id),
+                "favorite_id": i.id,
             }
         )
     paginator = Paginator(favorite_regroup, 6)
@@ -45,3 +46,13 @@ def index(request):
     }
 
     return render(request, "Favorite/index_favoris.html", context)
+
+def delete_substitute(request):
+    """get the id of product and id of his substitute in query with post method and save it with the id of connected
+    user. Redirect the user on the favorite page"""
+    query_substitute = request.POST["delete"]
+    if request.method == "POST":
+        query = Favorites.objects.get(pk=query_substitute)
+        query.delete()
+
+    return redirect("/favoris")
