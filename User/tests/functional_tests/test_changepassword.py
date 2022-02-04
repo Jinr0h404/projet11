@@ -7,10 +7,10 @@ from selenium.webdriver.common.by import By
 from User.models import CustomUser
 
 class TestChangePassword(StaticLiveServerTestCase):
-    """class containing methods to check the authentication part of the application"""
+    """class containing methods to check the password change part of the application"""
     @pytest.mark.django_db
     def test_changepassword(self):
-        """functional test with selenium to verify the user change password scenario."""
+        """functional test with selenium to verify the user password change scenario."""
         username = "toto"
         email = "toto@gmail.com"
         password = "ewen12345"

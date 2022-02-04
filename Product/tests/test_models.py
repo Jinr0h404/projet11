@@ -63,6 +63,15 @@ def product_fixture(db) -> Product:
             )
             cat_id = new_category.pk
             last_product.category.add(cat_id)
+        """ make a loop for each store"""
+        for store in i["store"]:
+            """like category, the value of the store key in the dictionary
+            can contain several elements. loop to fill my table with the
+            get_or_create function"""
+            store = store.strip()
+            new_store, created = Store.objects.get_or_create(store_name=store)
+            store_id = new_store.pk
+            last_product.store.add(store_id)
 
 
 def test_product_model(product_fixture):

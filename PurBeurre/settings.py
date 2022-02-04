@@ -11,7 +11,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 import dj_database_url
+import environ
 
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +26,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-1c-u#2k=xm@*$pws%w=mhntyd$c2l5yj90ed6b0!@+kkz9ntx0')
+SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
+
+#EMAIL SETUP
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = env('GMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('GMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'newedev team <noreply@newedev.com>'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('ENV') == 'PRODUCTION':
@@ -84,11 +99,11 @@ WSGI_APPLICATION = 'PurBeurre.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'purbeurre',
-        'USER': 'ewen',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'NAME': env("DATABASE_NAME"),
+        'USER': env("DATABASE_USER"),
+        'PASSWORD': env("DATABASE_PASSWORD"),
+        'HOST': env("DATABASE_HOST"),
+        'PORT': env("DATABASE_PORT"),
     }
 }
 

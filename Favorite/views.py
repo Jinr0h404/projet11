@@ -48,8 +48,8 @@ def index(request):
     return render(request, "Favorite/index_favoris.html", context)
 
 def delete_substitute(request):
-    """get the id of product and id of his substitute in query with post method and save it with the id of connected
-    user. Redirect the user on the favorite page"""
+    """get the id of the substitute in query with post method and delete it.
+    Redirect the user on the favorite page"""
     query_substitute = request.POST["delete"]
     if request.method == "POST":
         query = Favorites.objects.get(pk=query_substitute)
