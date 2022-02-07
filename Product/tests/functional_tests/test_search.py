@@ -17,7 +17,8 @@ class TestSearch(StaticLiveServerTestCase):
         search_input = self.browser.find_element(By.ID, "search_form_navbar")
         search_input.send_keys("pizza")
         search_input.send_keys(Keys.RETURN)
-        self.assertEqual(self.browser.find_element(By.TAG_NAME, "h2").text, "Pour quel aliment voulez-vous un substitut ?")
+        self.assertEqual(self.browser.find_element(By.TAG_NAME, "h2").text,
+                         "Pour quel aliment voulez-vous un substitut ?")
         self.assertEqual(
             self.browser.current_url, self.live_server_url + reverse("product-search") + "?query=pizza"
         )
@@ -32,9 +33,11 @@ class TestSearch(StaticLiveServerTestCase):
         search_input = self.browser.find_element(By.ID, "searchForm")
         search_input.send_keys("pizza")
         search_input.send_keys(Keys.RETURN)
-        self.assertEqual(self.browser.find_element(By.TAG_NAME, "h2").text, "Pour quel aliment voulez-vous un substitut ?")
+        self.assertEqual(self.browser.find_element(By.TAG_NAME, "h2").text,
+                         "Pour quel aliment voulez-vous un substitut ?")
         self.assertEqual(
-            self.browser.current_url, self.live_server_url + reverse("product-search") + "?query=pizza" + "&search_input=chercher"
+            self.browser.current_url, self.live_server_url + reverse(
+                "product-search") + "?query=pizza" + "&search_input=chercher"
         )
         self.browser.close()
 
@@ -48,7 +51,8 @@ class TestSearch(StaticLiveServerTestCase):
         search_input.send_keys("pizza")
         search_submit = self.browser.find_element(By.NAME, "search_input")
         search_submit.submit()
-        self.assertEqual(self.browser.find_element(By.TAG_NAME, "h2").text, "Pour quel aliment voulez-vous un substitut ?")
+        self.assertEqual(self.browser.find_element(By.TAG_NAME, "h2").text,
+                         "Pour quel aliment voulez-vous un substitut ?")
         self.assertEqual(
             self.browser.current_url, self.live_server_url + reverse("product-search") + "?query=pizza"
         )

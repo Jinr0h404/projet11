@@ -47,6 +47,7 @@ def index(request):
 
     return render(request, "Favorite/index_favoris.html", context)
 
+
 def delete_substitute(request):
     """get the id of the substitute in query with post method and delete it.
     Redirect the user on the favorite page"""

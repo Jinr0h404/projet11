@@ -63,6 +63,7 @@ def logout_user(request):
     logout(request)
     return redirect("index")
 
+
 @login_required()
 def password_change(request):
     if request.method == 'POST':

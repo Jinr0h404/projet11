@@ -6,6 +6,7 @@ from django.urls import reverse
 from selenium.webdriver.common.by import By
 from User.models import CustomUser
 
+
 class TestChangePassword(StaticLiveServerTestCase):
     """class containing methods to check the password change part of the application"""
     @pytest.mark.django_db

@@ -19,7 +19,6 @@ class TestDelete(StaticLiveServerTestCase):
         email = "toto@gmail.com"
         password = "ewen12345"
         user = CustomUser.objects.create_user(username=username, email=email, password=password)
-        #user = CustomUser.objects.get(pk=1)
         product_list = [
             {
                 "name": "nutella",
@@ -87,14 +86,11 @@ class TestDelete(StaticLiveServerTestCase):
                 store_id = new_store.pk
                 last_product.store.add(store_id)
         prodTest = Product.objects.all()
-        print("la liste des produits est:", prodTest)
         product_test = Product.objects.get(product_name='lightella')
         substitute = Product.objects.get(product_name='nutella')
-        print("juste avant la création")
         favorite = Favorites.objects.create(
             substitute_id=product_test, product_id=substitute, user_id=user
         )
-        print("le favoris est créé:")
         self.s = Service("Product/tests/functional_tests/chromedriver")
         self.browser = webdriver.Chrome(service=self.s)
         self.browser.get(self.live_server_url + reverse("favorite-index"))
