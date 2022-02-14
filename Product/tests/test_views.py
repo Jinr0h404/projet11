@@ -23,7 +23,10 @@ def test_search_view(product_fixture):
     Check that the HTTP status code is 200. Check that the template used is the expected one"""
     client = Client()
     path = reverse("product-search")
-    response = client.get(path, {"query": "nutella"})
+    response = client.get(path, {"query": "pizza saison"})
+    send_query = "pizza saison"
+    keep_query = response.context["query"]
+    assert send_query == keep_query
     assert response.status_code == 200
     assertTemplateUsed(response, "Product/search.html")
 
