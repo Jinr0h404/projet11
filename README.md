@@ -50,21 +50,22 @@ so it is recommended to put them in environment variables and not in clear in th
 1. with the App update, the application now manages the sending of mail for password reset.
 This part is to be configured in the settings.py file according to your mail server:
 **# EMAIL SETUP**
-* EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-* EMAIL_HOST = smtp server address, for example: 'smtp.gmail.com'
-* EMAIL_HOST_USER = your smtp username, for example: 'name@gmail.com'
-* EMAIL_HOST_PASSWORD = 'your password'
-* EMAIL_PORT = the smtp port of your mail server, for example for gmail: 587
-* EMAIL_USE_TLS = True
-* DEFAULT_FROM_EMAIL = optional, matches the displayed sender name, for example: 'support team <noreply@myapp.com>'
+* `EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'`
+* `EMAIL_HOST = smtp server address, for example: 'smtp.gmail.com'`
+* `EMAIL_HOST_USER = your smtp username, for example: 'name@gmail.com'`
+* `EMAIL_HOST_PASSWORD = 'your password'`
+* `EMAIL_PORT = the smtp port of your mail server, for example for gmail: 587`
+* `EMAIL_USE_TLS = True`
+* `DEFAULT_FROM_EMAIL = optional, matches the displayed sender name, for example: 'support team <noreply@myapp.com>'`
 
 2. About the database:
-	'ENGINE': 'django.db.backends.postgresql',
-        'NAME': the name of the database used
-        'USER': the username having access to the database
-        'PASSWORD': the user's password
-        'HOST': the address of the database server, in our case: 'localhost'
-        'PORT': the port of the database server, in the case of postgres by default '5432'
+- `'ENGINE': 'django.db.backends.postgresql',`
+- `'NAME': the name of the database used`
+- `'USER': the username having access to the database`
+- `'PASSWORD': the user's password`
+- `'HOST': the address of the database server, in our case: 'localhost'`
+- `'PORT': the port of the database server, in the case of postgres by default '5432'`
+
 
 ## Application
 
